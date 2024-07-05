@@ -1,0 +1,19 @@
+---
+title: "R example"
+author: "Mike Spencer"
+format: html
+---
+
+## Intro
+
+Welcome to our quick start guide to working with Hive partitioned data.
+This is a data format which grew out of the distributed computing landscape of Hadoop and helps scale workflows, both through speed improvements and resource reduction.
+
+This guide is written in Quarto, which is a literate programming wrapper for combining code and text into compiled output.
+
+The document is split into code chunks to give you some examples of how to efficiently work with Hive partitioned data.
+
+
+## Data
+
+These are stored on disk in 
