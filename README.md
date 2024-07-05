@@ -7,6 +7,7 @@ Quick start guide for new users working with Hive partitioned data in R or Pytho
 
 * `generate_test_data.R` script to make some sample data
 * `R_hive_example.qmd` quarto doc with R code chunks
+* `R_hive_example.md` *read this file in Github* for the worked examples
 * python example
 
 
