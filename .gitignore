@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 test_data/*
+example_rolling/*
 .DS_Store
-
