@@ -1,14 +1,16 @@
 # Base R image
 FROM docker.io/rocker/r-ver
 
-# Make a directory in the container
-RUN mkdir /home/r-environment
-
 # Install R dependencies
-RUN R -e "install.packages(c('dplyr', 'arrow'))"
+RUN Rscript -e "install.packages('pak')"
+RUN Rscript -e "pak::pak(c('dplyr', 'arrow'))"
 
-# Copy our R script to the container
-COPY generate_test_data_container.R /home/r-environment/script.R
+WORKDIR /home/hive-guide
+
+# Copy our R script to the container and postcode data file into the container
+COPY R/ R/
+COPY data-input/ data-input/
+COPY data-output/ data-output/
 
 # Run the R script
-CMD R -e "source('/home/r-environment/script.R')"
+CMD Rscript R/generate_test_data.R
