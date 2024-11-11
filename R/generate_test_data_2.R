@@ -39,7 +39,7 @@ dates = seq.Date(as.Date("2019-01-06"), by = 7, to = Sys.Date())
 
 
 
-parallel::mclapply(dates, mc.cores = 1, function(i){
+lapply(dates, function(i){
   # Delete a random sample of 1% of customers with 10% probability from the data set to mimic customers closing accounts (so on average we lose 1% of customers every 10 weeks)
   # Adjust probability/proportion as necessary, or remove if statement to invoke a smooth decline
   if  (runif(1) < 0.1){

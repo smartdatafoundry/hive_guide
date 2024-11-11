@@ -7,8 +7,10 @@ Quick start guide for new users working with Hive partitioned data in R or Pytho
 
 ### Sample data
 
-* `generate_test_data.R` standalone script to make some sample data, which is also accessed from the container
+* `generate_test_data.R` standalone script in `R` folder to make some sample data, which is also accessed from the container
+* `generate_test_data_2.R` standalone script in `R` folder to make some sample data with persistent cash balances but no parallel processing. Can change Dockerfile to use this in the container alternatively
 * `Dockerfile` instruction set for building the data generator container
+* `postal_districts.csv` CSV file in data-input folder containing UK postal districts, used to sample from to generate customer postal_district in the sample data. Accessed by the data generation script and copied into the container
 
 
 To create the data in a container using Podman or Docker:

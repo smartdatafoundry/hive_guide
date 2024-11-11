@@ -7,7 +7,9 @@
 library(dplyr)
 library(arrow)
 
+
 # ---------------------------------
+
 # Demographic
 sample_size = 50000
 
@@ -19,7 +21,7 @@ all_postal_districts = read.csv("data-input/postal_districts.csv", header = FALS
 # Create df of customer information
 customer_information = tibble(
   cid = paste0(sample(0:9, sample_size, replace = TRUE), sample(100000000:999999999, sample_size, replace = FALSE)),
-  # Ocassionally change postcode
+  # Could occasionally change postcode
   postal_district = sample(all_postal_districts$V1, sample_size, replace = TRUE),
   sex = sample(c("M", "F"), sample_size, replace = TRUE),
   dob = as.Date(runif(sample_size, as.numeric(as.Date("1919-01-06")), as.numeric(as.Date("2001-01-06"))), origin = "1970-01-01"),
@@ -127,5 +129,4 @@ parallel::mclapply(dates, mc.cores = 10, function(i){
 
 # Compress
 system("tar -zcvf data-output/test_data.tar.gz data-output/test_data")
-
 

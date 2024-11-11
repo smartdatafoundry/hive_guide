@@ -72,7 +72,7 @@ DuckDB) is used for rapid selection, filtering, etc. of data, which can
 then be written to a file or read into R.
 
 ``` r
-ds = open_dataset("test_data")
+ds = open_dataset("data-output/test_data")
 
 # print the column names and types
 ds
@@ -101,7 +101,7 @@ ds
 
 ``` r
 # One quirk is that the column used for the partition becomes a string, so let's fix this
-ds = open_dataset("test_data") %>% 
+ds = open_dataset("data-output/test_data") %>% 
   mutate(end_of_this_period = as.Date(end_of_this_period))
 ```
 

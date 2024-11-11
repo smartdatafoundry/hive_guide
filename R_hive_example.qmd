@@ -51,13 +51,13 @@ This connection (either Arrow or DuckDB) is used for rapid selection, filtering,
 ```{r}
 #| label: connection
 
-ds = open_dataset("test_data")
+ds = open_dataset("data-output/test_data")
 
 # print the column names and types
 ds
 
 # One quirk is that the column used for the partition becomes a string, so let's fix this
-ds = open_dataset("test_data") %>% 
+ds = open_dataset("data-output/test_data") %>% 
   mutate(end_of_this_period = as.Date(end_of_this_period))
 ```
 
