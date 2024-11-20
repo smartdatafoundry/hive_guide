@@ -117,4 +117,4 @@ lapply(dates, function(i){
 })
 
 # Compress
-system("tar -zcvf data-output/test_data.tar.gz data-output/test_data")
+system("tar -zcvf data-output/test_data.tar.gz --directory=data-output test_data")

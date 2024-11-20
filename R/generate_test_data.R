@@ -128,5 +128,5 @@ parallel::mclapply(dates, mc.cores = 10, function(i){
 
 
 # Compress
-system("tar -zcvf data-output/test_data.tar.gz data-output/test_data")
+system("tar -zcvf data-output/test_data.tar.gz --directory=data-output test_data")
 
