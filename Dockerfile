@@ -1,9 +1,11 @@
 # Base R image
 FROM docker.io/rocker/r-ver
 
+RUN apt-get update && apt-get -y install --no-install-recommends zstd 
+
 # Install R dependencies
 RUN Rscript -e "install.packages('pak')"
-RUN Rscript -e "pak::pak(c('dplyr', 'arrow'))"
+RUN Rscript -e "pak::pak(c('dplyr', 'arrow', 'future.apply'))"
 
 WORKDIR /home/hive-guide
 
@@ -11,6 +13,7 @@ WORKDIR /home/hive-guide
 COPY R/ R/
 COPY data-input/ data-input/
 COPY data-output/ data-output/
+COPY .future.R .future.R
 
 # Run the R script
 CMD Rscript R/generate_test_data.R
