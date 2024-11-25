@@ -6,7 +6,8 @@
 
 library(arrow)
 library(dplyr)
-
+library(future)
+library(future.apply)
 
 # ---------------------------------
 
