@@ -132,10 +132,7 @@ parallel::mclapply(dates, mc.cores = 10, function(i) {
     group_by(end_of_this_period) %>%
     write_dataset("data-output/test_data/")
 
-
-
-  gc()
-
+  return(i)
 })
 
 
