@@ -66,7 +66,7 @@ create_cid_list = function(customer_information, dates) {
 all_cids = create_cid_list(customer_information, dates)
 names(all_cids) = as.Date(dates)
 
-parallel::mclapply(dates, mc.cores = 10, function(i) {
+future.apply::future_lapply(dates, function(i) {
   sample_of_cids = all_cids[[as.character(i)]]
   new_sample_size = length(sample_of_cids)
   sample_customer_info = subset(customer_information, cid %in% sample_of_cids)
