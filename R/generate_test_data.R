@@ -38,20 +38,29 @@ customer_information = tibble(
 
 dates = seq.Date(as.Date("2019-01-06"), by = 7, to = Sys.Date())
 
-# Create a list of the ids corresponding to each date
-active_customers = customer_information$cid
-all_cids = lapply(dates, function(dates){
-  # Delete a random sample of 1% of customers with 10% probability from the data set to mimic customers closing accounts (so on average we lose 1% of customers every 10 weeks)
-  # Adjust probability/proportion as necessary, or remove if statement to invoke a smooth decline
-  if  (runif(1) < 0.1){
-    rows_to_delete = sample(active_customers, size = round(0.01 * length(active_customers)), replace = FALSE)
-    active_customers <<- setdiff(active_customers, rows_to_delete)
+# A function to create a list of the ids corresponding to each date
+create_cid_list = function(customer_information, dates){
+  active_customers = customer_information$cid
+  all_cids = vector(mode = "list", length = length(dates))
+  # Function to sample a percentage of customer ids from a set of customers
+  sample_customer_pct = function(customers, percentage){
+    sample(customers, size = round(percentage * length(customers)), replace = FALSE)
   }
-  # Sample 99% of all ids in a particular week
-  sample_of_cids = sample(active_customers, size = round(0.99 * length(active_customers)), replace = FALSE)
-  sample_of_cids
-})
+  for (i in seq_along(dates)){
+    # Delete a random sample of 1% of customers with 10% probability from the data set to mimic customers closing accounts (so on average we lose 1% of customers every 10 weeks)
+    # Adjust probability/proportion as necessary, or remove if statement to invoke a smooth decline
+    if  (runif(1) < 0.1){
+      rows_to_delete = sample_customer_pct(active_customers, 0.01)
+      active_customers = setdiff(active_customers, rows_to_delete)
+    }
+    # Sample 99% of all ids in a particular week
+    sample_of_cids = sample_customer_pct(active_customers, 0.99)
+    all_cids[[i]] = sample_of_cids
+  }
+  return(all_cids)
+}
 
+all_cids = create_cid_list(customer_information, dates)
 names(all_cids) = as.Date(dates)
 
 parallel::mclapply(dates, mc.cores = 10, function(i){
