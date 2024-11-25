@@ -1,0 +1,7 @@
+linters: linters_with_defaults(
+    line_length_linter = NULL, # Don't want to have to worry about this, especially not to halt CI
+    object_length_linter = NULL, # Complains about variable and function names over 30 chars in length
+    commented_code_linter = NULL, # Doesn't matter
+    assignment_linter = NULL # Original author prefers `=` assignment
+  ) 
+encoding: "UTF-8"
