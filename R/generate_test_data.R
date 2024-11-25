@@ -138,4 +138,5 @@ parallel::mclapply(dates, mc.cores = 10, function(i) {
 
 
 # Compress
-system("tar -zcvf data-output/test_data.tar.gz --directory=data-output test_data")
+# Multithreading supplied to zstd with `-T` flag
+system(sprintf("tar -I 'zstd -T%s' -cvf data-output/test_data.tar.zst data-output/test_data", workers))
