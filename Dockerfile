@@ -1,6 +1,8 @@
 # Base R image
 FROM docker.io/rocker/r-ver
 
+# For compressing the output files
+ENV RUNNING_IN_CONTAINER="TRUE"
 RUN apt-get update && apt-get -y install --no-install-recommends zstd 
 
 # Install R dependencies

@@ -139,4 +139,6 @@ future.apply::future_lapply(dates, function(i) {
 
 # Compress
 # Multithreading supplied to zstd with `-T` flag
-system(sprintf("tar -I 'zstd -T%s' -cvf data-output/test_data.tar.zst data-output/test_data", workers))
+if (identical(Sys.getenv("RUNNING_IN_CONTAINER"), "TRUE")) {
+  system(sprintf("tar -I 'zstd -T%s' -cvf data-output/test_data.tar.zst data-output/test_data", workers))
+}
