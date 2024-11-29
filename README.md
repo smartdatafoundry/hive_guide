@@ -19,7 +19,7 @@ To create the data in a container using Podman or Docker:
 1. Build the container `podman build --platform linux/amd64 -t demo_data .`
 1. Run the container `podman run --name demo_data demo_data`
    1. To opt into parallel processing, do `podman run --name demo_data -e PARALLEL_WORKERS=n demo_data` where `n` is the number of cores to use
-1. Fetch the sample data from the container with: `podman cp demo_data:data-output/test_data.tar.zst data-output/test_data.tar.zst`
+1. Fetch the sample data from the container with: `podman cp demo_data:data-output/test_data/ data-output/`
 
 > [!CAUTION]
 > When running the container with parallelisation be sensible with the number of workers. The program will crash if you provide more than can be used, surfacing an error starting with `MultisessionFuture (future_lapply-6) failed to receive message results from cluster RichSOCKnode`. If this happens, reduce the number of workers and try again.
