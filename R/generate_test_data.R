@@ -135,8 +135,3 @@ future.apply::future_lapply(dates, function(i) {
 
   return(i)
 })
-
-
-# Compress
-# Multithreading supplied to zstd with `-T` flag
-system(sprintf("tar -I 'zstd -T%s' -cvf data-output/test_data.tar.zst data-output/test_data", workers))

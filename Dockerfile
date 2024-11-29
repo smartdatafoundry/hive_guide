@@ -1,8 +1,6 @@
 # Base R image
 FROM docker.io/rocker/r-ver
 
-RUN apt-get update && apt-get -y install --no-install-recommends zstd 
-
 # Install R dependencies
 RUN Rscript -e "install.packages('pak')"
 RUN Rscript -e "pak::pak(c('dplyr', 'arrow', 'future.apply'))"
