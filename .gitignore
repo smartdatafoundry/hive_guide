@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-test_data/*
+data-output/test_data/*
 example_rolling/*
 .DS_Store
+data-output/test_data_output/*
