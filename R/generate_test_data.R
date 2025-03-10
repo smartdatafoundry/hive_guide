@@ -18,7 +18,7 @@ sample_size = 50000
 all_postal_districts = read.csv("data-input/postal_districts.csv", header = FALSE)
 
 # Load in geography lookup
-geog = read.csv("data-input/region_lookup.csv")
+geog = read.csv("data-input/DataZone2022lookup_2024-12-16.csv")
 
 # Create df of customer information
 customer_information = tibble(
@@ -27,7 +27,7 @@ customer_information = tibble(
   postal_district = sample(all_postal_districts$V1, sample_size, replace = TRUE),
   # DataZone and postal_district are not linked. They would be in a real dataset. We plan to address this. See issue for more info:
   # https://github.com/smartdatafoundry/hive_guide/issues/9
-  datazone = sample(geog$dz_code, sample_size, replace = TRUE),
+  datazone = sample(geog$DZ22_Code, sample_size, replace = TRUE),
   sex = sample(c("M", "F"), sample_size, replace = TRUE),
   dob = as.Date(runif(sample_size, as.numeric(as.Date("1919-01-06")), as.numeric(as.Date("2001-01-06"))), origin = "1970-01-01"),
 
