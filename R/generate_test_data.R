@@ -115,22 +115,22 @@ future.apply::future_lapply(dates, function(i) {
         income_benefits_tax_credit + income_benefits_pension_credit + income_benefits_other +
         income_pension_lump_sum + income_pension_regular_payment + income_investment +
         income_interest + income_other,
-      expenditure_committed_mortgage = ifelse(has_mortgage == 1, (income + runif(new_sample_size, income * -1, income)) * 0.2, 0),
-      expenditure_committed_rent = ifelse(is_renting == 1, (income + runif(new_sample_size, income * -1, income)) * 0.2, 0),
-      expenditure_committed_other = (income + runif(new_sample_size, income * -1, income)) * 0.1,
-      expenditure_essential_council_tax = (income + runif(new_sample_size, income * -1, income)) * 0.1,
-      expenditure_essential_other = (income + runif(new_sample_size, income * -1, income)) * 0.4,
-      expenditure_qol = (income + runif(new_sample_size, income * -1, income)) * 0.1,
-      expenditure_discretionary_pension = (income + runif(new_sample_size, income * -1, income)) * 0.0025,
-      expenditure_discretionary_other = (income + runif(new_sample_size, income * -1, income)) * 0.0025,
-      expenditure_uncategorized = (income + runif(new_sample_size, income * -1, income)) * 0.05,
+      expenditure_committed_mortgage = ifelse(has_mortgage == 1, (income + runif(new_sample_size, income * -1, income)) * -0.2, 0),
+      expenditure_committed_rent = ifelse(is_renting == 1, (income + runif(new_sample_size, income * -1, income)) * -0.2, 0),
+      expenditure_committed_other = (income + runif(new_sample_size, income * -1, income)) * -0.1,
+      expenditure_essential_council_tax = (income + runif(new_sample_size, income * -1, income)) * -0.1,
+      expenditure_essential_other = (income + runif(new_sample_size, income * -1, income)) * -0.4,
+      expenditure_qol = (income + runif(new_sample_size, income * -1, income)) * -0.1,
+      expenditure_discretionary_pension = (income + runif(new_sample_size, income * -1, income)) * -0.0025,
+      expenditure_discretionary_other = (income + runif(new_sample_size, income * -1, income)) * -0.0025,
+      expenditure_uncategorized = (income + runif(new_sample_size, income * -1, income)) * -0.05,
       expenditure = expenditure_committed_mortgage + expenditure_committed_rent +
         expenditure_committed_other + expenditure_essential_council_tax +
         expenditure_essential_other + expenditure_qol +
         expenditure_discretionary_pension + expenditure_discretionary_other +
         expenditure_uncategorized,
-      cash_min = runif(new_sample_size, expenditure * -1, income - expenditure),
-      cash_max = runif(new_sample_size, income - expenditure, income),
+      cash_min = runif(new_sample_size, expenditure , income + expenditure),
+      cash_max = runif(new_sample_size, income + expenditure, income),
       # Could implement persistent cash_balance_final such that cash_balance_final(n) = cash_balance_final(n-1) + income - expenditure
       cash_balance_final = runif(new_sample_size, cash_min, cash_max)
     ) %>%
