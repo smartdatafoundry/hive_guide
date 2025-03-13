@@ -25,8 +25,8 @@ customer_information = tibble(
   cid = paste0(sample(0:9, sample_size, replace = TRUE), sample(100000000:999999999, sample_size, replace = FALSE)),
   # Could occasionally change postcode
   geo_index = sample(1:num_dzs, sample_size, replace = TRUE),
-  postal_district = geog[geo_index, 1],
-  datazone = geog[geo_index, 2],
+  postal_district = geog[geo_index, "pcd2"],
+  datazone = geog[geo_index, "lsoa21"],
   sex = sample(c("M", "F"), sample_size, replace = TRUE),
   dob = as.Date(runif(sample_size, as.numeric(as.Date("1919-01-06")), as.numeric(as.Date("2001-01-06"))), origin = "1970-01-01"),
 
