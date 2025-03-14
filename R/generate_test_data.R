@@ -14,20 +14,19 @@ library(future.apply)
 # Demographic
 sample_size = 50000
 
-# Load in list of all UK postal districts
-all_postal_districts = read.csv("data-input/postal_districts.csv", header = FALSE)
-
 # Load in geography lookup
-geog = read.csv("data-input/DataZone2022lookup_2024-12-16.csv")
+geog = read.csv("data-input/pd_datazone.csv", header = TRUE)
+
+# Find the length of geography lookup to sample a row from - choose the pcd and dz from that row
+num_dzs = nrow(geog)
 
 # Create df of customer information
 customer_information = tibble(
   cid = paste0(sample(0:9, sample_size, replace = TRUE), sample(100000000:999999999, sample_size, replace = FALSE)),
   # Could occasionally change postcode
-  postal_district = sample(all_postal_districts$V1, sample_size, replace = TRUE),
-  # DataZone and postal_district are not linked. They would be in a real dataset. We plan to address this. See issue for more info:
-  # https://github.com/smartdatafoundry/hive_guide/issues/9
-  datazone = sample(geog$DZ22_Code, sample_size, replace = TRUE),
+  geo_index = sample(1:num_dzs, sample_size, replace = TRUE),
+  postal_district = geog[geo_index, "pcd2"],
+  datazone = geog[geo_index, "lsoa21"],
   sex = sample(c("M", "F"), sample_size, replace = TRUE),
   dob = as.Date(runif(sample_size, as.numeric(as.Date("1919-01-06")), as.numeric(as.Date("2001-01-06"))), origin = "1970-01-01"),
 
@@ -135,7 +134,7 @@ future.apply::future_lapply(dates, function(i) {
       cash_balance_final = runif(new_sample_size, cash_min, cash_max)
     ) %>%
     # Remove cols that are not present in NWG data
-    select(-age, -dob, -is_renting, -has_mortgage, -weekly_earner) %>%
+    select(-age, -dob, -is_renting, -has_mortgage, -weekly_earner, -geo_index) %>%
     group_by(end_of_this_period) %>%
     write_dataset("data-output/test_data/")
 
